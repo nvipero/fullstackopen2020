@@ -1,0 +1,25 @@
+note over selain:
+käyttäjä syöttää tekstikenttään: uusi note
+käyttäjä painaa Save
+end note
+
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note right of selain:
+Request payload:
+{
+    content: "uusi note",
+    date: "2020-10-02T19:09:41.925Z"
+}
+end note
+
+note over palvelin:
+palvelin tallentaa lähetetyn noten
+end note
+
+palvelin-->selain: 201 Created { "message": "note created" }
+
+note over selain:
+JavaScript-koodi päivittää uuden noten listaan
+lataamatta jsonia uudestaan
+end note

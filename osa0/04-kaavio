@@ -1,0 +1,45 @@
+note over selain:
+käyttäjä syöttää tekstikenttään: uusi note
+käyttäjä painaa Save
+end note
+
+selain->palvelin: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+
+note right of selain:
+Form Data:
+note=uusi note
+end note
+
+note over palvelin:
+palvelin tallentaa lähetetyn noten
+end note
+
+palvelin-->selain: 302 redirect: /notes
+
+note over selain:
+uudelleenohjauksesta seuraava sivun uudelleenlataus
+end note
+
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+palvelin-->selain: HTML-sivu
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+palvelin-->selain: main.css
+
+note over selain:
+selain hakee päivitetyn json-sisällön
+end note
+
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
+palvelin-->selain: main.js
+
+note over selain:
+selain hakee päivitetyn json-sisällön
+end note
+
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+palvelin-->selain: [{ content: "uusi note", date: "2020-10-02T17:36:12.215Z" }, ...]
+
+note over selain:
+selain rendaa päivitetyn listauksen,
+jossa aiemmin lähetetty note mukana
+end note
